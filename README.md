@@ -40,29 +40,13 @@ All commands are run from the root of the project, from a terminal:
 
 ## 🖼️ Conversione immagini (PNG/JPG → WebP)
 
-Lo script `scripts/convert-images.mjs` converte in WebP tutte le immagini che
-metti in `imgSoruce/`, salvando il risultato in `imgDest/`, senza toccare gli
-originali. Usalo ogni volta che devi caricare foto o immagini pesanti (es. il
-giornale settimanale) prima di spostarle nella loro cartella finale sotto
-`public/`.
+```sh
+npm run convert-images
+```
 
-**Come si usa:**
-
-1. Copia le immagini (`.png`, `.jpg`, `.jpeg`) dentro la cartella `imgSoruce/`
-   nella root del progetto (creala se non esiste).
-2. Lancia lo script:
-   ```sh
-   npm run convert-images
-   ```
-3. Trovi i file convertiti in `.webp` dentro `imgDest/`, con lo stesso nome
-   dell'originale (es. `foto.png` → `foto.webp`). Lo script stampa a schermo
-   quanto si è ridotto ogni file.
-4. Sposta manualmente i file da `imgDest/` nella cartella `public/` dove
-   servono (es. `public/quotidiani/<stagione>/` per il giornale settimanale,
-   `public/squadre/` per gli stemmi).
-
-`imgSoruce/` e `imgDest/` sono cartelle di lavoro temporanee (escluse da git):
-puoi svuotarle quando vuoi, tanto i file definitivi vivono sotto `public/`.
+Converte in WebP tutte le immagini in `imgSoruce/` e le salva in `imgDest/`,
+pronte per essere spostate a mano sotto `public/`. Guida completa:
+[docs/script-conversione-immagini.md](docs/script-conversione-immagini.md).
 
 ## 👀 Want to learn more?
 

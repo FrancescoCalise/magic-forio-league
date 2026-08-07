@@ -10,30 +10,9 @@
     "fc-e-nu-spettacl",
     "taddeo-my-goat"
   ],
-  "competizioni": [
-    {
-      "nome": "Magic Forio League",
-      "classificaUrl": "https://leghe.fantacalcio.it/magic-forio-league/view/competition/36152/standings"
-    },
-    {
-      "nome": "Coppa Italia",
-      "classificaUrl": "https://leghe.fantacalcio.it/magic-forio-league/view/competition/44779/standings",
-      "note": "Giornate 10-18"
-    },
-    {
-      "nome": "Champions League",
-      "classificaUrl": "https://leghe.fantacalcio.it/magic-forio-league/view/competition/44801/standings",
-      "note": "Giornate 26-34"
-    },
-    {
-      "nome": "Battle Royale",
-      "classificaUrl": "https://leghe.fantacalcio.it/magic-forio-league/view/competition/44809/standings",
-      "note": "Tutte le giornate"
-    }
-  ],
   "giornale": [
     {
-      "settimana": 1,
+      "settimana": 0,
       "data": "2025-05-10",
       "titolo": "Si accende la magia!",
       "immagine": "0.webp"
