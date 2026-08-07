@@ -24,3 +24,5 @@ pnpm-debug.log*
 .idea/
 
 image-total/
+imgDest/
+imgSoruce/

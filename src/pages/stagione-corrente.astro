@@ -1,0 +1,189 @@
+---
+import Layout from "../layouts/Layout.astro";
+import TrophyIcon from "../components/TrophyIcon.astro";
+import {
+  stagioneCorrente,
+  getSquadreStagioneCorrente,
+  getGiocatore,
+} from "../lib/data";
+import { withBase } from "../lib/url";
+
+const squadreInGara = getSquadreStagioneCorrente();
+const competizioni = stagioneCorrente.competizioni;
+
+const stagioneSlug = stagioneCorrente.stagione.replace("/", "-");
+const edizioniGiornale = [...stagioneCorrente.giornale].sort(
+  (a, b) => b.settimana - a.settimana,
+);
+---
+
+<Layout
+  title={`Stagione ${stagioneCorrente.stagione}`}
+  description={`Squadre in gara, classifiche live e giornale settimanale della stagione ${stagioneCorrente.stagione} della Magic Forio League.`}
+>
+  <section class="border-b border-border px-6 py-16 text-center">
+    <h1 class="font-display text-6xl tracking-wide text-foreground">
+      Stagione {stagioneCorrente.stagione}
+    </h1>
+    <p class="mx-auto mt-4 max-w-xl text-muted-foreground">
+      Le squadre in gara, le classifiche live di ogni competizione e il
+      giornale settimanale della lega.
+    </p>
+  </section>
+
+  <section class="border-b border-border px-6 py-16">
+    <div class="mx-auto max-w-6xl">
+      <h2 class="mb-8 text-center font-display text-3xl tracking-wide text-foreground">
+        Squadre in gara
+      </h2>
+      {
+        squadreInGara.length === 0 ? (
+          <p class="text-center text-muted-foreground">
+            Le squadre iscritte a questa stagione saranno annunciate a breve.
+          </p>
+        ) : (
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {squadreInGara.map((squadra) => {
+              const giocatore = getGiocatore(squadra.giocatoreId);
+              return (
+                <div class="flex items-center gap-4 rounded-lg border border-border bg-card p-4">
+                  <img
+                    src={withBase(giocatore.immagine)}
+                    alt={`Foto di ${giocatore.nome}`}
+                    width="48"
+                    height="48"
+                    loading="lazy"
+                    class="h-12 w-12 shrink-0 rounded-full border-2 border-accent object-cover"
+                  />
+                  <div class="min-w-0 flex-1">
+                    <p class="truncate font-display text-xl tracking-wide text-foreground">
+                      {squadra.nome}
+                    </p>
+                    <p class="truncate text-sm text-muted-foreground">{giocatore.nome}</p>
+                  </div>
+                  {squadra.logo && (
+                    <img
+                      src={withBase(squadra.logo)}
+                      alt={`Stemma ${squadra.nome}`}
+                      width="40"
+                      height="40"
+                      loading="lazy"
+                      class="h-10 w-10 shrink-0 rounded-full border border-border object-cover"
+                    />
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="border-b border-border px-6 py-16">
+    <div class="mx-auto max-w-5xl">
+      <h2 class="mb-8 text-center font-display text-3xl tracking-wide text-foreground">
+        Classifiche
+      </h2>
+      {
+        competizioni.length === 0 ? (
+          <p class="text-center text-muted-foreground">
+            Le classifiche saranno disponibili all'inizio della stagione.
+          </p>
+        ) : (
+          <div data-tabs>
+            <div class="mb-8 flex flex-wrap justify-center gap-3" role="tablist">
+              {competizioni.map((competizione, index) => (
+                <button
+                  type="button"
+                  data-tab-button
+                  data-tab-target={`classifica-${index}`}
+                  aria-selected={index === 0}
+                  class="cursor-pointer rounded-full border border-border px-4 py-2 text-sm font-semibold uppercase tracking-wide text-muted-foreground transition-colors hover:text-foreground aria-selected:border-accent aria-selected:text-accent"
+                >
+                  <TrophyIcon class="inline h-4 w-4 -translate-y-0.5" />{" "}
+                  {competizione.nome}
+                </button>
+              ))}
+            </div>
+            {competizioni.map((competizione, index) => (
+              <div
+                data-tab-panel
+                id={`classifica-${index}`}
+                class:list={["flex flex-col gap-3", { hidden: index !== 0 }]}
+              >
+                {competizione.note && (
+                  <p class="text-center text-sm text-muted-foreground">{competizione.note}</p>
+                )}
+                <iframe
+                  src={competizione.classificaUrl}
+                  title={`Classifica ${competizione.nome}`}
+                  loading="lazy"
+                  class="h-[900px] w-full rounded-lg border border-border bg-card"
+                />
+                <p class="text-center text-sm text-muted-foreground">
+                  Non vedi la classifica?{" "}
+                  <a
+                    href={competizione.classificaUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="font-semibold text-accent hover:underline"
+                  >
+                    Aprila in una nuova scheda &nearr;
+                  </a>
+                </p>
+              </div>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="px-6 py-16">
+    <div class="mx-auto max-w-4xl">
+      <h2 class="mb-8 text-center font-display text-3xl tracking-wide text-foreground">
+        Il Giornale della Lega
+      </h2>
+      {
+        edizioniGiornale.length === 0 ? (
+          <p class="text-center text-muted-foreground">
+            Il giornale settimanale sarà pubblicato qui a partire dalla prima
+            giornata.
+          </p>
+        ) : (
+          <div class="flex flex-col gap-10">
+            {edizioniGiornale.map((edizione) => (
+              <div>
+                <p class="mb-3 text-center text-sm font-semibold uppercase tracking-widest text-accent">
+                  Giornata {edizione.settimana} &middot; {edizione.titolo}
+                </p>
+                <img
+                  src={withBase(`/quotidiani/${stagioneSlug}/${edizione.immagine}`)}
+                  alt={edizione.titolo}
+                  width="900"
+                  loading="lazy"
+                  class="mx-auto w-full max-w-2xl rounded-lg border border-border"
+                />
+              </div>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </section>
+</Layout>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-tabs]").forEach((root) => {
+    const buttons = root.querySelectorAll<HTMLButtonElement>("[data-tab-button]");
+    const panels = root.querySelectorAll<HTMLElement>("[data-tab-panel]");
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const target = button.getAttribute("data-tab-target");
+        buttons.forEach((b) => b.setAttribute("aria-selected", String(b === button)));
+        panels.forEach((panel) => panel.classList.toggle("hidden", panel.id !== target));
+      });
+    });
+  });
+</script>

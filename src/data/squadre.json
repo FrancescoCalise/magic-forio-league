@@ -14,6 +14,10 @@
     { "id": "aspettando-godot", "nome": "Aspettando Godot", "giocatoreId": "michele-boccanfuso" },
     { "id": "good-life-team", "nome": "Good Life Team", "giocatoreId": "luca-cervera" },
     { "id": "taddeo-my-goat", "nome": "Taddeo My Goat", "giocatoreId": "giovanni-matarese" },
-    { "id": "new-team", "nome": "New Team", "giocatoreId": "francesco-arcuri" }
+    { "id": "new-team", "nome": "New Team", "giocatoreId": "francesco-arcuri" },
+    { "id": "le-bimbe-di-satan", "nome": "Le Bimbe Di Satan F.C.", "giocatoreId": "francesco-calise", "logo": "/squadre/le-bimbe-di-satan.png" },
+    { "id": "amma-fatica-ag4ain", "nome": "Amma fatica Ag4ain", "giocatoreId": "michele-boccanfuso" },
+    { "id": "fc-e-nu-spettacl", "nome": "FC E NU SPETTACL", "giocatoreId": "nicola-lamonaca" },
+    { "id": "bar-mario-e-la-banda-degli-onesti", "nome": "bar mario e la banda degli onesti", "giocatoreId": "giuseppe-polito" }
   ]
 }

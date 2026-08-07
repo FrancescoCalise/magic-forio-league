@@ -47,3 +47,23 @@ export interface ClassificaSquadraEntry {
   giocatore: Giocatore;
   titoli: number;
 }
+
+export interface CompetizioneCorrente {
+  nome: string;
+  classificaUrl: string;
+  note?: string;
+}
+
+export interface EdizioneGiornale {
+  settimana: number;
+  data: string;
+  titolo: string;
+  immagine: string;
+}
+
+export interface StagioneCorrenteData {
+  stagione: string;
+  squadre: string[];
+  competizioni: CompetizioneCorrente[];
+  giornale: EdizioneGiornale[];
+}

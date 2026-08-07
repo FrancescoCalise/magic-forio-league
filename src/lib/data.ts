@@ -1,5 +1,6 @@
 import giocatoriJson from "../data/giocatori.json";
 import squadreJson from "../data/squadre.json";
+import stagioneCorrenteJson from "../data/stagione-corrente.json";
 import type {
   ClassificaGiocatoreEntry,
   ClassificaSquadraEntry,
@@ -7,6 +8,7 @@ import type {
   GiocatoriData,
   Squadra,
   SquadreData,
+  StagioneCorrenteData,
   StagioneData,
   Titolo,
 } from "./types";
@@ -18,6 +20,7 @@ const stagioniModules = import.meta.glob<{ default: StagioneData }>(
 
 export const giocatori: Giocatore[] = (giocatoriJson as GiocatoriData).giocatori;
 export const squadre: Squadra[] = (squadreJson as SquadreData).squadre;
+export const stagioneCorrente: StagioneCorrenteData = stagioneCorrenteJson as StagioneCorrenteData;
 
 function inizioStagione(stagione: string): number {
   return Number.parseInt(stagione.split("/")[0], 10);
@@ -156,4 +159,8 @@ export function getClassificaSquadrePerCompetizione(): Map<string, ClassificaSqu
 
 export function getTotaleCompetizioni(): number {
   return stagioni.reduce((tot, s) => tot + s.competizioni.length, 0);
+}
+
+export function getSquadreStagioneCorrente(): Squadra[] {
+  return stagioneCorrente.squadre.map(getSquadra);
 }

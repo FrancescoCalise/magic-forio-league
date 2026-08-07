@@ -1,0 +1,42 @@
+{
+  "stagione": "2026/2027",
+  "squadre": [
+    "le-bimbe-di-satan",
+    "edoras",
+    "amma-fatica-ag4ain",
+    "good-life-team",
+    "bar-mario-e-la-banda-degli-onesti",
+    "new-team",
+    "fc-e-nu-spettacl",
+    "taddeo-my-goat"
+  ],
+  "competizioni": [
+    {
+      "nome": "Magic Forio League",
+      "classificaUrl": "https://leghe.fantacalcio.it/magic-forio-league/view/competition/36152/standings"
+    },
+    {
+      "nome": "Coppa Italia",
+      "classificaUrl": "https://leghe.fantacalcio.it/magic-forio-league/view/competition/44779/standings",
+      "note": "Giornate 10-18"
+    },
+    {
+      "nome": "Champions League",
+      "classificaUrl": "https://leghe.fantacalcio.it/magic-forio-league/view/competition/44801/standings",
+      "note": "Giornate 26-34"
+    },
+    {
+      "nome": "Battle Royale",
+      "classificaUrl": "https://leghe.fantacalcio.it/magic-forio-league/view/competition/44809/standings",
+      "note": "Tutte le giornate"
+    }
+  ],
+  "giornale": [
+    {
+      "settimana": 1,
+      "data": "2025-05-10",
+      "titolo": "Si accende la magia!",
+      "immagine": "0.webp"
+    }
+  ]
+}

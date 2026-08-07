@@ -2,9 +2,11 @@
 import { Image } from "astro:assets";
 import logo from "../assets/logo-magic-forio-cup.png";
 import { withBase } from "../lib/url";
+import { stagioneCorrente } from "../lib/data";
 
 const links = [
   { href: "/", label: "Home" },
+  { href: "/stagione-corrente", label: `Stagione ${stagioneCorrente.stagione}` },
   { href: "/albo-oro", label: "Albo d'Oro" },
   { href: "/community", label: "Community" },
 ];

@@ -10,6 +10,7 @@
     { "id": "michele-boccanfuso", "nome": "Michele Boccanfuso", "immagine": "/giocatori/michele-boccanfuso.svg" },
     { "id": "luca-cervera", "nome": "Luca Cervera", "immagine": "/giocatori/luca-cervera.svg" },
     { "id": "giovanni-matarese", "nome": "Giovanni Matarese", "immagine": "/giocatori/giovanni-matarese.svg" },
-    { "id": "francesco-arcuri", "nome": "Francesco Arcuri", "immagine": "/giocatori/francesco-arcuri.svg" }
+    { "id": "francesco-arcuri", "nome": "Francesco Arcuri", "immagine": "/giocatori/francesco-arcuri.svg" },
+    { "id": "giuseppe-polito", "nome": "Giuseppe Polito", "immagine": "/giocatori/giuseppe-polito.svg" }
   ]
 }
