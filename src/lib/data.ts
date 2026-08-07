@@ -87,10 +87,10 @@ export function getStoricoPerCompetizione(): Map<string, Titolo[]> {
   return storico;
 }
 
-export function getClassificaGiocatori(): ClassificaGiocatoreEntry[] {
+function classificaGiocatoriDa(titoli: Titolo[]): ClassificaGiocatoreEntry[] {
   const mappa = new Map<string, ClassificaGiocatoreEntry>();
 
-  for (const titolo of getTitoli()) {
+  for (const titolo of titoli) {
     const esistente = mappa.get(titolo.giocatore.id);
     if (esistente) {
       esistente.titoli += 1;
@@ -109,10 +109,10 @@ export function getClassificaGiocatori(): ClassificaGiocatoreEntry[] {
   return Array.from(mappa.values()).sort((a, b) => b.titoli - a.titoli);
 }
 
-export function getClassificaSquadre(): ClassificaSquadraEntry[] {
+function classificaSquadreDa(titoli: Titolo[]): ClassificaSquadraEntry[] {
   const mappa = new Map<string, ClassificaSquadraEntry>();
 
-  for (const titolo of getTitoli()) {
+  for (const titolo of titoli) {
     const esistente = mappa.get(titolo.squadra.id);
     if (esistente) {
       esistente.titoli += 1;
@@ -126,6 +126,32 @@ export function getClassificaSquadre(): ClassificaSquadraEntry[] {
   }
 
   return Array.from(mappa.values()).sort((a, b) => b.titoli - a.titoli);
+}
+
+export function getClassificaGiocatori(): ClassificaGiocatoreEntry[] {
+  return classificaGiocatoriDa(getTitoli());
+}
+
+export function getClassificaSquadre(): ClassificaSquadraEntry[] {
+  return classificaSquadreDa(getTitoli());
+}
+
+export function getClassificaGiocatoriPerCompetizione(): Map<string, ClassificaGiocatoreEntry[]> {
+  const mappa = new Map<string, ClassificaGiocatoreEntry[]>();
+  for (const nome of getCompetizioniNomi()) {
+    const titoliCompetizione = getTitoli().filter((t) => t.competizione === nome);
+    mappa.set(nome, classificaGiocatoriDa(titoliCompetizione));
+  }
+  return mappa;
+}
+
+export function getClassificaSquadrePerCompetizione(): Map<string, ClassificaSquadraEntry[]> {
+  const mappa = new Map<string, ClassificaSquadraEntry[]>();
+  for (const nome of getCompetizioniNomi()) {
+    const titoliCompetizione = getTitoli().filter((t) => t.competizione === nome);
+    mappa.set(nome, classificaSquadreDa(titoliCompetizione));
+  }
+  return mappa;
 }
 
 export function getTotaleCompetizioni(): number {
