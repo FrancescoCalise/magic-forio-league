@@ -1,6 +1,7 @@
 ---
 import TrophyIcon from "./TrophyIcon.astro";
 import type { Giocatore, Squadra } from "../lib/types";
+import { withBase } from "../lib/url";
 
 interface Props {
   competizione: string;
@@ -13,7 +14,7 @@ const { competizione, squadra, giocatore } = Astro.props;
 
 <div class="flex items-center gap-4 rounded-lg border border-border bg-card p-4">
   <img
-    src={giocatore.immagine}
+    src={withBase(giocatore.immagine)}
     alt={`Foto di ${giocatore.nome}`}
     width="56"
     height="56"
@@ -33,7 +34,7 @@ const { competizione, squadra, giocatore } = Astro.props;
   {
     squadra.logo && (
       <img
-        src={squadra.logo}
+        src={withBase(squadra.logo)}
         alt={`Stemma ${squadra.nome}`}
         width="40"
         height="40"

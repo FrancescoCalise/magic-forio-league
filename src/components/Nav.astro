@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import logo from "../assets/logo-magic-forio-cup.png";
+import { withBase } from "../lib/url";
 
 const links = [
   { href: "/", label: "Home" },
@@ -14,7 +15,7 @@ const currentPath = new URL(Astro.request.url).pathname;
 <header class="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
   <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
     <a
-      href="/"
+      href={withBase("/")}
       class="flex items-center gap-2 font-display text-2xl tracking-wide text-foreground transition-colors hover:text-accent"
     >
       <Image
@@ -30,11 +31,11 @@ const currentPath = new URL(Astro.request.url).pathname;
     <ul class="flex items-center gap-6">
       {
         links.map((link) => {
-          const isActive = currentPath === link.href;
+          const isActive = currentPath === withBase(link.href);
           return (
             <li>
               <a
-                href={link.href}
+                href={withBase(link.href)}
                 class:list={[
                   "cursor-pointer text-sm font-semibold uppercase tracking-wide transition-colors",
                   isActive

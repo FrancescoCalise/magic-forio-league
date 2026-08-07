@@ -9,6 +9,7 @@ import {
   getCompetizioniNomi,
   getStoricoPerCompetizione,
 } from "../lib/data";
+import { withBase } from "../lib/url";
 
 const classificaGiocatori = getClassificaGiocatori();
 const classificaSquadre = getClassificaSquadre();
@@ -68,7 +69,7 @@ const storicoPerCompetizione = getStoricoPerCompetizione();
                       {index + 1}
                     </span>
                     <img
-                      src={entry.giocatore.immagine}
+                      src={withBase(entry.giocatore.immagine)}
                       alt={`Foto di ${entry.giocatore.nome}`}
                       width="48"
                       height="48"
@@ -110,7 +111,7 @@ const storicoPerCompetizione = getStoricoPerCompetizione();
                       {index + 1}
                     </span>
                     <img
-                      src={entry.giocatore.immagine}
+                      src={withBase(entry.giocatore.immagine)}
                       alt={`Foto di ${entry.giocatore.nome}`}
                       width="48"
                       height="48"
@@ -127,7 +128,7 @@ const storicoPerCompetizione = getStoricoPerCompetizione();
                     </div>
                     {entry.squadra.logo && (
                       <img
-                        src={entry.squadra.logo}
+                        src={withBase(entry.squadra.logo)}
                         alt={`Stemma ${entry.squadra.nome}`}
                         width="36"
                         height="36"
@@ -159,7 +160,7 @@ const storicoPerCompetizione = getStoricoPerCompetizione();
                   {index + 1}
                 </span>
                 <img
-                  src={entry.giocatore.immagine}
+                  src={withBase(entry.giocatore.immagine)}
                   alt={`Foto di ${entry.giocatore.nome}`}
                   width="48"
                   height="48"
@@ -194,7 +195,7 @@ const storicoPerCompetizione = getStoricoPerCompetizione();
                   {index + 1}
                 </span>
                 <img
-                  src={entry.giocatore.immagine}
+                  src={withBase(entry.giocatore.immagine)}
                   alt={`Foto di ${entry.giocatore.nome}`}
                   width="48"
                   height="48"
@@ -211,7 +212,7 @@ const storicoPerCompetizione = getStoricoPerCompetizione();
                 </div>
                 {entry.squadra.logo && (
                   <img
-                    src={entry.squadra.logo}
+                    src={withBase(entry.squadra.logo)}
                     alt={`Stemma ${entry.squadra.nome}`}
                     width="36"
                     height="36"

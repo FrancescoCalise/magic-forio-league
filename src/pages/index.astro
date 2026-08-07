@@ -13,6 +13,7 @@ import {
   getGiocatore,
   getTotaleCompetizioni,
 } from "../lib/data";
+import { withBase } from "../lib/url";
 
 const primaStagione = stagioni[stagioni.length - 1];
 const ultimaStagione = stagioni[0];
@@ -48,7 +49,7 @@ const stats = [
       </p>
       <div class="mt-10 flex flex-wrap justify-center gap-4">
         <a
-          href="/albo-oro"
+          href={withBase("/albo-oro")}
           class="cursor-pointer rounded-md bg-accent px-6 py-3 font-semibold text-accent-foreground transition-colors hover:bg-accent/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
         >
           Vai all'Albo d'Oro
@@ -96,7 +97,7 @@ const stats = [
           Stagione {ultimaStagione.stagione}
         </h2>
         <a
-          href="/albo-oro"
+          href={withBase("/albo-oro")}
           class="cursor-pointer text-sm font-semibold uppercase tracking-wide text-accent hover:text-accent/80"
         >
           Tutte le stagioni &rarr;
