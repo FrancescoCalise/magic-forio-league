@@ -1,0 +1,7 @@
+{
+  "stagione": "2021/2022",
+  "competizioni": [
+    { "nome": "Campionato", "vincitore": "magnus-house" },
+    { "nome": "Coppa di Lega", "vincitore": "magnus-house" }
+  ]
+}

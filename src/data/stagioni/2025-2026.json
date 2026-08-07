@@ -1,0 +1,9 @@
+{
+  "stagione": "2025/2026",
+  "competizioni": [
+    { "nome": "Campionato", "vincitore": "good-life-team" },
+    { "nome": "Coppa di Lega", "vincitore": "taddeo-my-goat" },
+    { "nome": "Champions League", "vincitore": "edoras" },
+    { "nome": "Formula Uno", "vincitore": "new-team" }
+  ]
+}

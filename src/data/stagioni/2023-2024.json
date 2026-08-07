@@ -1,0 +1,9 @@
+{
+  "stagione": "2023/2024",
+  "competizioni": [
+    { "nome": "Campionato", "vincitore": "edoras" },
+    { "nome": "Coppa di Lega", "vincitore": "aspettando-godot" },
+    { "nome": "Champions League", "vincitore": "new-team" },
+    { "nome": "Formula Uno", "vincitore": "edoras" }
+  ]
+}

@@ -1,0 +1,167 @@
+---
+import Layout from "../layouts/Layout.astro";
+import TrophyIcon from "../components/TrophyIcon.astro";
+import {
+  getClassificaGiocatori,
+  getClassificaSquadre,
+  getCompetizioniNomi,
+  getStoricoPerCompetizione,
+} from "../lib/data";
+
+const classificaGiocatori = getClassificaGiocatori();
+const classificaSquadre = getClassificaSquadre();
+const competizioniNomi = getCompetizioniNomi();
+const storicoPerCompetizione = getStoricoPerCompetizione();
+
+const sezioni = [
+  { href: "#per-giocatore", label: "Per Giocatore" },
+  { href: "#per-squadra", label: "Per Squadra" },
+  { href: "#per-competizione", label: "Per Competizione" },
+];
+---
+
+<Layout title="Albo d'Oro">
+  <section class="border-b border-border px-6 py-16 text-center">
+    <h1 class="font-display text-6xl tracking-wide text-foreground">Albo d'Oro</h1>
+    <p class="mx-auto mt-4 max-w-xl text-muted-foreground">
+      Tutti i vincitori di ogni competizione, stagione dopo stagione.
+    </p>
+    <nav class="mt-8 flex flex-wrap justify-center gap-3">
+      {
+        sezioni.map((sezione) => (
+          <a
+            href={sezione.href}
+            class="cursor-pointer rounded-full border border-border px-4 py-2 text-sm font-semibold uppercase tracking-wide text-muted-foreground transition-colors hover:border-accent hover:text-accent"
+          >
+            {sezione.label}
+          </a>
+        ))
+      }
+    </nav>
+  </section>
+
+  <section id="per-giocatore" class="border-b border-border px-6 py-16">
+    <div class="mx-auto max-w-3xl">
+      <h2 class="mb-8 text-center font-display text-3xl tracking-wide text-foreground">
+        Albo d'Oro per Giocatore
+      </h2>
+      <ol class="flex flex-col gap-3">
+        {
+          classificaGiocatori.map((entry, index) => (
+            <li class="flex items-center gap-4 rounded-lg border border-border bg-card p-4">
+              <span class="w-8 shrink-0 text-center font-display text-2xl text-muted-foreground">
+                {index + 1}
+              </span>
+              <img
+                src={entry.giocatore.immagine}
+                alt={`Foto di ${entry.giocatore.nome}`}
+                width="48"
+                height="48"
+                loading="lazy"
+                class="h-12 w-12 shrink-0 rounded-full border-2 border-accent object-cover"
+              />
+              <div class="min-w-0 flex-1">
+                <p class="truncate font-display text-xl tracking-wide text-foreground">
+                  {entry.giocatore.nome}
+                </p>
+                <p class="truncate text-xs text-muted-foreground">
+                  {entry.squadre.map((s) => s.nome).join(" · ")}
+                </p>
+              </div>
+              <span class="flex shrink-0 items-center gap-1.5 font-semibold text-accent">
+                <TrophyIcon class="h-4 w-4" />
+                {entry.titoli}
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section id="per-squadra" class="border-b border-border px-6 py-16">
+    <div class="mx-auto max-w-3xl">
+      <h2 class="mb-8 text-center font-display text-3xl tracking-wide text-foreground">
+        Albo d'Oro per Squadra
+      </h2>
+      <ol class="flex flex-col gap-3">
+        {
+          classificaSquadre.map((entry, index) => (
+            <li class="flex items-center gap-4 rounded-lg border border-border bg-card p-4">
+              <span class="w-8 shrink-0 text-center font-display text-2xl text-muted-foreground">
+                {index + 1}
+              </span>
+              <img
+                src={entry.giocatore.immagine}
+                alt={`Foto di ${entry.giocatore.nome}`}
+                width="48"
+                height="48"
+                loading="lazy"
+                class="h-12 w-12 shrink-0 rounded-full border-2 border-accent object-cover"
+              />
+              <div class="min-w-0 flex-1">
+                <p class="truncate font-display text-xl tracking-wide text-foreground">
+                  {entry.squadra.nome}
+                </p>
+                <p class="truncate text-xs text-muted-foreground">
+                  {entry.giocatore.nome}
+                </p>
+              </div>
+              {entry.squadra.logo && (
+                <img
+                  src={entry.squadra.logo}
+                  alt={`Stemma ${entry.squadra.nome}`}
+                  width="36"
+                  height="36"
+                  loading="lazy"
+                  class="h-9 w-9 shrink-0 rounded-full border border-border object-cover"
+                />
+              )}
+              <span class="flex shrink-0 items-center gap-1.5 font-semibold text-accent">
+                <TrophyIcon class="h-4 w-4" />
+                {entry.titoli}
+              </span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section id="per-competizione" class="px-6 py-16">
+    <div class="mx-auto max-w-4xl">
+      <h2 class="mb-10 text-center font-display text-3xl tracking-wide text-foreground">
+        Storico per Competizione
+      </h2>
+      <div class="flex flex-col gap-12">
+        {
+          competizioniNomi.map((nomeCompetizione) => (
+            <div>
+              <h3 class="mb-4 flex items-center gap-2 font-display text-3xl tracking-wide text-accent">
+                <TrophyIcon class="h-6 w-6" />
+                {nomeCompetizione}
+              </h3>
+              <ol class="flex flex-col gap-2">
+                {(storicoPerCompetizione.get(nomeCompetizione) ?? []).map(
+                  (titolo) => (
+                    <li class="flex items-center gap-4 rounded-lg border border-border bg-card px-4 py-3">
+                      <span class="w-24 shrink-0 font-display text-lg tracking-wide text-muted-foreground">
+                        {titolo.stagione}
+                      </span>
+                      <span class="min-w-0 flex-1 truncate font-semibold text-foreground">
+                        {titolo.squadra.nome}
+                      </span>
+                      <span class="shrink-0 truncate text-sm text-muted-foreground">
+                        {titolo.giocatore.nome}
+                      </span>
+                    </li>
+                  ),
+                )}
+              </ol>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>

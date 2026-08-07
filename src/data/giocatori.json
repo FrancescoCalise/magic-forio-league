@@ -1,0 +1,15 @@
+{
+  "giocatori": [
+    { "id": "giovanni-lamonaca", "nome": "Giovanni Lamonaca", "immagine": "/giocatori/giovanni-lamonaca.svg" },
+    { "id": "francesco-calise", "nome": "Francesco Calise", "immagine": "/giocatori/francesco-calise.svg" },
+    { "id": "luigi-della-monica", "nome": "Luigi della Monica", "immagine": "/giocatori/luigi-della-monica.svg" },
+    { "id": "eugenio-verde", "nome": "Eugenio Verde", "immagine": "/giocatori/eugenio-verde.svg" },
+    { "id": "antonio-esposito", "nome": "Antonio Esposito", "immagine": "/giocatori/antonio-esposito.svg" },
+    { "id": "paolo-dalise", "nome": "Paolo Dalise", "immagine": "/giocatori/paolo-dalise.svg" },
+    { "id": "nicola-lamonaca", "nome": "Nicola Lamonaca", "immagine": "/giocatori/nicola-lamonaca.svg" },
+    { "id": "michele-boccanfuso", "nome": "Michele Boccanfuso", "immagine": "/giocatori/michele-boccanfuso.svg" },
+    { "id": "luca-cervera", "nome": "Luca Cervera", "immagine": "/giocatori/luca-cervera.svg" },
+    { "id": "giovanni-matarese", "nome": "Giovanni Matarese", "immagine": "/giocatori/giovanni-matarese.svg" },
+    { "id": "francesco-arcuri", "nome": "Francesco Arcuri", "immagine": "/giocatori/francesco-arcuri.svg" }
+  ]
+}

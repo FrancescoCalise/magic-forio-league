@@ -1,0 +1,60 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+
+const fotoModules = import.meta.glob<{ default: ImageMetadata }>(
+  "../assets/community/*/*.{jpg,jpeg,png}",
+  { eager: true },
+);
+
+const stagioni = new Map<string, ImageMetadata[]>();
+
+for (const [path, mod] of Object.entries(fotoModules)) {
+  const stagione = path.split("/").at(-2)!;
+  const foto = stagioni.get(stagione) ?? [];
+  foto.push(mod.default);
+  stagioni.set(stagione, foto);
+}
+
+const gallerie = [...stagioni.entries()]
+  .sort((a, b) => b[0].localeCompare(a[0]))
+  .map(([stagione, foto]) => ({
+    stagione: stagione.replace("-", "/"),
+    foto,
+  }));
+---
+
+<Layout
+  title="Community"
+  description="Gli scatti della community della Magic Forio League: premiazioni, serate e momenti tra amici, stagione dopo stagione."
+>
+  <section class="border-b border-border px-6 py-16 text-center">
+    <h1 class="font-display text-6xl tracking-wide text-foreground">Community</h1>
+    <p class="mx-auto mt-4 max-w-xl text-muted-foreground">
+      I momenti più belli della lega, raccontati dalle foto di chi c'era.
+    </p>
+  </section>
+
+  {
+    gallerie.map(({ stagione, foto }) => (
+      <section class="border-b border-border px-6 py-16 last:border-b-0">
+        <div class="mx-auto max-w-6xl">
+          <h2 class="mb-8 font-display text-3xl tracking-wide text-foreground">
+            Stagione {stagione}
+          </h2>
+          <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+            {foto.map((img) => (
+              <Image
+                src={img}
+                alt={`Foto community Magic Forio League, stagione ${stagione}`}
+                width={480}
+                loading="lazy"
+                class="aspect-square w-full rounded-lg border border-border object-cover"
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    ))
+  }
+</Layout>

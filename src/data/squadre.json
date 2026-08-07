@@ -1,0 +1,19 @@
+{
+  "squadre": [
+    { "id": "edoras", "nome": "Edoras", "giocatoreId": "giovanni-lamonaca", "logo": "/squadre/edoras.jpg" },
+    { "id": "umbrella-corporation", "nome": "Umbrella Corporation", "giocatoreId": "francesco-calise" },
+    { "id": "minas-tirith", "nome": "Minas Tirith", "giocatoreId": "luigi-della-monica", "logo": "/squadre/minas-tirith.png" },
+    { "id": "sc-arsenal", "nome": "SC Arsenal", "giocatoreId": "eugenio-verde" },
+    { "id": "luna-rossa-piranha", "nome": "Luna Rossa Piranha", "giocatoreId": "antonio-esposito" },
+    { "id": "ac-denti", "nome": "AC Denti", "giocatoreId": "paolo-dalise" },
+    { "id": "guardiolas-blue-and-white-army", "nome": "Guardiola's Blue and White Army", "giocatoreId": "nicola-lamonaca" },
+    { "id": "vdinqf", "nome": "VDINQF", "giocatoreId": "nicola-lamonaca" },
+    { "id": "magnus-house", "nome": "Magnus House", "giocatoreId": "michele-boccanfuso" },
+    { "id": "patrick-jane", "nome": "Patrick Jane", "giocatoreId": "michele-boccanfuso" },
+    { "id": "amma-fatica", "nome": "Amma Fatica", "giocatoreId": "michele-boccanfuso" },
+    { "id": "aspettando-godot", "nome": "Aspettando Godot", "giocatoreId": "michele-boccanfuso" },
+    { "id": "good-life-team", "nome": "Good Life Team", "giocatoreId": "luca-cervera" },
+    { "id": "taddeo-my-goat", "nome": "Taddeo My Goat", "giocatoreId": "giovanni-matarese" },
+    { "id": "new-team", "nome": "New Team", "giocatoreId": "francesco-arcuri" }
+  ]
+}

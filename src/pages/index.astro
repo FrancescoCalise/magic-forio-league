@@ -1,0 +1,121 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/logo-magic-forio-cup.png";
+import Layout from "../layouts/Layout.astro";
+import VittoriaCard from "../components/VittoriaCard.astro";
+import TrophyIcon from "../components/TrophyIcon.astro";
+import UsersIcon from "../components/UsersIcon.astro";
+import CalendarIcon from "../components/CalendarIcon.astro";
+import {
+  stagioni,
+  giocatori,
+  getSquadra,
+  getGiocatore,
+  getTotaleCompetizioni,
+} from "../lib/data";
+
+const primaStagione = stagioni[stagioni.length - 1];
+const ultimaStagione = stagioni[0];
+
+const stats = [
+  { icon: CalendarIcon, label: "Stagioni disputate", value: stagioni.length },
+  { icon: TrophyIcon, label: "Titoli assegnati", value: getTotaleCompetizioni() },
+  { icon: UsersIcon, label: "Giocatori", value: giocatori.length },
+];
+---
+
+<Layout title="Home">
+  <section class="border-b border-border bg-gradient-to-b from-muted to-background px-6 py-24 text-center">
+    <div class="mx-auto max-w-3xl">
+      <Image
+        src={logo}
+        alt="Logo Magic Forio League"
+        width={280}
+        height={280}
+        class="mx-auto mb-6 h-32 w-32 sm:h-36 sm:w-36"
+      />
+      <p class="mb-4 text-sm font-semibold uppercase tracking-widest text-accent">
+        Dalla stagione {primaStagione.stagione}
+      </p>
+      <h1 class="font-display text-6xl leading-none tracking-wide text-foreground sm:text-7xl">
+        MAGIC FORIO LEAGUE
+      </h1>
+      <p class="mx-auto mt-6 max-w-xl text-lg text-muted-foreground">
+        La lega di fantacalcio tra amici dove ogni stagione si giocano più
+        competizioni e ogni trofeo racconta una storia. Scopri i campioni di
+        ogni annata nell'albo d'oro.
+      </p>
+      <div class="mt-10 flex flex-wrap justify-center gap-4">
+        <a
+          href="/albo-oro"
+          class="cursor-pointer rounded-md bg-accent px-6 py-3 font-semibold text-accent-foreground transition-colors hover:bg-accent/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+        >
+          Vai all'Albo d'Oro
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-border px-6 py-16">
+    <div class="mx-auto grid max-w-6xl gap-6 sm:grid-cols-3">
+      {
+        stats.map((stat) => (
+          <div class="flex flex-col items-center gap-3 rounded-lg border border-border bg-card p-8 text-center">
+            <stat.icon class="h-8 w-8 text-accent" />
+            <p class="font-display text-4xl text-foreground">{stat.value}</p>
+            <p class="text-sm uppercase tracking-wide text-muted-foreground">
+              {stat.label}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="border-b border-border px-6 py-16">
+    <div class="mx-auto max-w-3xl text-center">
+      <h2 class="font-display text-4xl tracking-wide text-foreground">
+        Cos'è la Magic Forio League
+      </h2>
+      <p class="mt-4 text-muted-foreground">
+        Ogni anno un gruppo di amici si sfida a colpi di formazioni e
+        pronostici. Ogni stagione può includere più competizioni &mdash;
+        Campionato, Coppa di Lega e negli ultimi anni anche Champions League,
+        Europa League e Formula Uno &mdash; ognuna con la propria squadra
+        vincitrice. Tutta la storia della lega, stagione dopo stagione, è
+        raccolta nell'albo d'oro.
+      </p>
+    </div>
+  </section>
+
+  <section class="px-6 py-16">
+    <div class="mx-auto max-w-4xl">
+      <div class="mb-8 flex items-center justify-between">
+        <h2 class="font-display text-4xl tracking-wide text-foreground">
+          Stagione {ultimaStagione.stagione}
+        </h2>
+        <a
+          href="/albo-oro"
+          class="cursor-pointer text-sm font-semibold uppercase tracking-wide text-accent hover:text-accent/80"
+        >
+          Tutte le stagioni &rarr;
+        </a>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {
+          ultimaStagione.competizioni.map((competizione) => {
+            const squadra = getSquadra(competizione.vincitore);
+            const giocatore = getGiocatore(squadra.giocatoreId);
+            return (
+              <VittoriaCard
+                competizione={competizione.nome}
+                squadra={squadra}
+                giocatore={giocatore}
+              />
+            );
+          })
+        }
+      </div>
+    </div>
+  </section>
+</Layout>

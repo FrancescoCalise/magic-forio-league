@@ -1,0 +1,9 @@
+{
+  "stagione": "2022/2023",
+  "competizioni": [
+    { "nome": "Campionato", "vincitore": "patrick-jane" },
+    { "nome": "Coppa di Lega", "vincitore": "edoras" },
+    { "nome": "Europa League", "vincitore": "edoras" },
+    { "nome": "Champions League", "vincitore": "edoras" }
+  ]
+}

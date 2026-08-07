@@ -1,0 +1,9 @@
+{
+  "stagione": "2024/2025",
+  "competizioni": [
+    { "nome": "Campionato", "vincitore": "amma-fatica" },
+    { "nome": "Coppa di Lega", "vincitore": "amma-fatica" },
+    { "nome": "Champions League", "vincitore": "amma-fatica" },
+    { "nome": "Formula Uno", "vincitore": "amma-fatica" }
+  ]
+}

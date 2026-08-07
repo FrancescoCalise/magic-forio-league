@@ -1,0 +1,53 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/logo-magic-forio-cup.png";
+
+const links = [
+  { href: "/", label: "Home" },
+  { href: "/albo-oro", label: "Albo d'Oro" },
+  { href: "/community", label: "Community" },
+];
+
+const currentPath = new URL(Astro.request.url).pathname;
+---
+
+<header class="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
+  <nav class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+    <a
+      href="/"
+      class="flex items-center gap-2 font-display text-2xl tracking-wide text-foreground transition-colors hover:text-accent"
+    >
+      <Image
+        src={logo}
+        alt="Logo Magic Forio League"
+        width={72}
+        height={72}
+        class="h-9 w-9"
+      />
+      MAGIC FORIO LEAGUE
+    </a>
+    <ul class="flex items-center gap-6">
+      {
+        links.map((link) => {
+          const isActive = currentPath === link.href;
+          return (
+            <li>
+              <a
+                href={link.href}
+                class:list={[
+                  "cursor-pointer text-sm font-semibold uppercase tracking-wide transition-colors",
+                  isActive
+                    ? "text-accent"
+                    : "text-muted-foreground hover:text-foreground",
+                ]}
+                aria-current={isActive ? "page" : undefined}
+              >
+                {link.label}
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </nav>
+</header>
