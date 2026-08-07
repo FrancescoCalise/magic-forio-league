@@ -26,7 +26,61 @@ const edizioniGiornale = [...stagioneCorrente.giornale].sort(
     <p class="mx-auto mt-4 max-w-xl text-muted-foreground">
       Le squadre in gara e il giornale settimanale della lega.
     </p>
+    {
+      stagioneCorrente.regolamentoUrl && (
+        <a
+          href={withBase(stagioneCorrente.regolamentoUrl)}
+          download
+          class="mt-8 inline-flex cursor-pointer items-center gap-2 rounded-md bg-accent px-6 py-3 font-semibold text-accent-foreground transition-colors hover:bg-accent/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16" /></svg>
+          Scarica il Regolamento
+        </a>
+      )
+    }
   </section>
+
+  {
+    stagioneCorrente.astaData && (
+      <section class="border-b border-border px-6 py-16 text-center">
+        <p class="mb-2 text-sm font-semibold uppercase tracking-widest text-accent">
+          Conto alla rovescia per l'asta
+        </p>
+        <p class="mb-8 text-muted-foreground">
+          {new Date(stagioneCorrente.astaData).toLocaleString("it-IT", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
+        </p>
+        <div data-countdown={stagioneCorrente.astaData} class="mx-auto max-w-md">
+          <div data-countdown-grid class="grid grid-cols-4 gap-3 sm:gap-4">
+            <div class="rounded-lg border border-border bg-card p-4">
+              <p class="font-display text-4xl text-foreground" data-countdown-days>--</p>
+              <p class="text-xs uppercase tracking-wide text-muted-foreground">Giorni</p>
+            </div>
+            <div class="rounded-lg border border-border bg-card p-4">
+              <p class="font-display text-4xl text-foreground" data-countdown-hours>--</p>
+              <p class="text-xs uppercase tracking-wide text-muted-foreground">Ore</p>
+            </div>
+            <div class="rounded-lg border border-border bg-card p-4">
+              <p class="font-display text-4xl text-foreground" data-countdown-minutes>--</p>
+              <p class="text-xs uppercase tracking-wide text-muted-foreground">Minuti</p>
+            </div>
+            <div class="rounded-lg border border-border bg-card p-4">
+              <p class="font-display text-4xl text-foreground" data-countdown-seconds>--</p>
+              <p class="text-xs uppercase tracking-wide text-muted-foreground">Secondi</p>
+            </div>
+          </div>
+          <p data-countdown-finished class="hidden font-display text-2xl tracking-wide text-accent">
+            L'asta è iniziata!
+          </p>
+        </div>
+      </section>
+    )
+  }
 
   <section class="border-b border-border px-6 py-16">
     <div class="mx-auto max-w-6xl">
@@ -131,6 +185,40 @@ const edizioniGiornale = [...stagioneCorrente.giornale].sort(
 </Layout>
 
 <script>
+  document.querySelectorAll<HTMLElement>("[data-countdown]").forEach((root) => {
+    const target = new Date(root.dataset.countdown!).getTime();
+    const grid = root.querySelector<HTMLElement>("[data-countdown-grid]");
+    const finished = root.querySelector<HTMLElement>("[data-countdown-finished]");
+    const daysEl = root.querySelector<HTMLElement>("[data-countdown-days]");
+    const hoursEl = root.querySelector<HTMLElement>("[data-countdown-hours]");
+    const minutesEl = root.querySelector<HTMLElement>("[data-countdown-minutes]");
+    const secondsEl = root.querySelector<HTMLElement>("[data-countdown-seconds]");
+
+    function tick() {
+      const diff = target - Date.now();
+
+      if (diff <= 0) {
+        grid?.classList.add("hidden");
+        finished?.classList.remove("hidden");
+        clearInterval(interval);
+        return;
+      }
+
+      const days = Math.floor(diff / 86_400_000);
+      const hours = Math.floor((diff % 86_400_000) / 3_600_000);
+      const minutes = Math.floor((diff % 3_600_000) / 60_000);
+      const seconds = Math.floor((diff % 60_000) / 1_000);
+
+      if (daysEl) daysEl.textContent = String(days);
+      if (hoursEl) hoursEl.textContent = String(hours).padStart(2, "0");
+      if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, "0");
+      if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, "0");
+    }
+
+    tick();
+    const interval = setInterval(tick, 1000);
+  });
+
   document.querySelectorAll<HTMLElement>("[data-giornale]").forEach((root) => {
     const slides = Array.from(root.querySelectorAll<HTMLImageElement>("[data-giornale-slide]"));
     const label = root.querySelector<HTMLElement>("[data-giornale-label]");

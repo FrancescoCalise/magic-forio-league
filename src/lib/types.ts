@@ -58,5 +58,7 @@ export interface EdizioneGiornale {
 export interface StagioneCorrenteData {
   stagione: string;
   squadre: string[];
+  regolamentoUrl?: string;
+  astaData?: string;
   giornale: EdizioneGiornale[];
 }
